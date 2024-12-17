@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import { notionService } from "../service";
 import { sendJson } from "../utils";
-import { client } from "../config/redis";
+import { redis } from "../config/redis";
+
 
 
 export const getTotalProjects = async (req: Request, res: Response) => {
-    const cachedData = await client.get("totalProjects");
+    const cachedData = await redis.get("totalProjects");
     if (cachedData) {
         return sendJson(res, {
             message: "Total Project fetched successfully from cachedData",
@@ -21,7 +22,7 @@ export const getTotalProjects = async (req: Request, res: Response) => {
                 return
             }
         })
-        await client.setEx("totalProjects", 3600, JSON.stringify(result));
+        await redis.setex("totalProjects", 3600, JSON.stringify(result));
         sendJson(res, {
             message: "Total Project fetched successfully",
             data: result
