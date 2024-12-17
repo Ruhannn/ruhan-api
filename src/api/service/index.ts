@@ -3,7 +3,7 @@ import { Client } from '@notionhq/client';
 import config from '../config';
 
 
-export default class NotionService {
+class NotionService {
     client: Client;
     constructor() {
         this.client = new Client({ auth: config.notion_token });
@@ -39,6 +39,21 @@ export default class NotionService {
             }
         }))
     }
+    async getTotalProjects() {
+        const database = config.project_database_id;
+
+        const response = await this.client.databases.query({
+            database_id: database,
+            filter: {
+                property: 'published',
+                checkbox: {
+                    equals: true,
+                },
+            }
+        });
+
+        return response.results.length
+    }
     async addViews(pageId: string) {
         const page: any = await this.client.pages.retrieve({ page_id: pageId });
         const currentViews = page.properties.views?.number || 0;
@@ -52,3 +67,4 @@ export default class NotionService {
         });
     }
 }
+export const notionService = new NotionService();

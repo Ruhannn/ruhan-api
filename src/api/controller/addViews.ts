@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import NotionService from "../service";
-import { sendJson } from "../utils";
 
-const notionService = new NotionService();
+import { sendJson } from "../utils";
+import { notionService } from "../service";
+
 export const addViews = async (req: Request, res: Response) => {
     const pageId = req.params.id
     if (!pageId) {
