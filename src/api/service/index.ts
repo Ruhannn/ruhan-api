@@ -71,6 +71,12 @@ class NotionService {
 
         const response = await this.client.databases.query({
             database_id: database,
+            filter: {
+                property: 'published',
+                checkbox: {
+                    equals: true,
+                },
+            },
             sorts: [
                 {
                     property: 'name',
