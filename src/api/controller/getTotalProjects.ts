@@ -8,7 +8,7 @@ export const getTotalProjects = async (req: Request, res: Response) => {
     const cachedData = await client.get("totalProjects");
     if (cachedData) {
         return sendJson(res, {
-            message: "Total Project fetched successfully",
+            message: "Total Project fetched successfully from cachedData",
             data: JSON.parse(cachedData)
         });
     } else {
