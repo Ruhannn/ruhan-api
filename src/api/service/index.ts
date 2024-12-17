@@ -66,5 +66,27 @@ class NotionService {
             },
         });
     }
+    async getSkills() {
+        const database = config.skill_database_id;
+
+        const response = await this.client.databases.query({
+            database_id: database,
+            sorts: [
+                {
+                    property: 'name',
+                    direction: 'ascending',
+                },
+            ],
+        });
+        return response.results.map((a: any) => {
+            return {
+                icon: a.icon.external.url,
+                backgroundColor: a.properties.bgColor.rich_text[0].plain_text,
+                name: a.properties.name.title[0].plain_text,
+                type: a.properties.type.rich_text[0].plain_text,
+                useCase: a.properties.useCase.rich_text[0].plain_text
+            }
+        })
+    }
 }
 export const notionService = new NotionService();
