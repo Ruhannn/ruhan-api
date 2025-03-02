@@ -7,7 +7,6 @@ import { getSkills } from "../controller/getSkills";
 
 const router = Router();
 
-
 router.get('/projects', getProjects);
 router.get('/skills', getSkills);
 router.get('/add-views/:id', addViews);
