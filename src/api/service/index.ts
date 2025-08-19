@@ -21,7 +21,7 @@ class NotionService {
             },
             sorts: [
                 {
-                    property: 'Name',
+                    property: 'views',
                     direction: 'ascending',
                 },
             ],
@@ -38,21 +38,6 @@ class NotionService {
                 what: a.properties.what.rich_text[0].plain_text
             }
         }))
-    }
-    async getTotalProjects() {
-        const database = config.project_database_id;
-
-        const response = await this.client.databases.query({
-            database_id: database,
-            filter: {
-                property: 'published',
-                checkbox: {
-                    equals: true,
-                },
-            }
-        });
-
-        return response.results.length
     }
     async addViews(pageId: string) {
         const page: any = await this.client.pages.retrieve({ page_id: pageId });
@@ -79,14 +64,14 @@ class NotionService {
             },
             sorts: [
                 {
-                    property: 'name',
+                    property: 'num',
                     direction: 'ascending',
                 },
             ],
         });
         return response.results.map((a: any) => {
             return {
-                icon: a.icon.external.url,
+                icon: a.icon.file ? a.icon.file.url : a.icon.external.url,
                 backgroundColor: a.properties.bgColor.rich_text[0].plain_text,
                 name: a.properties.name.title[0].plain_text,
                 type: a.properties.type.rich_text[0].plain_text,
@@ -95,4 +80,6 @@ class NotionService {
         })
     }
 }
+
+
 export const notionService = new NotionService();

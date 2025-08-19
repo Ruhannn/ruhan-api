@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { sendJson } from "../utils";
-import { notionService } from "../service";
 import { redis } from "../config/redis";
+import { notionService } from "../service";
+import { sendJson } from "../utils";
 
 
 
