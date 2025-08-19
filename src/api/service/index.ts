@@ -22,7 +22,7 @@ class NotionService {
             sorts: [
                 {
                     property: 'views',
-                    direction: 'ascending',
+                    direction: 'descending',
                 },
             ],
         });
