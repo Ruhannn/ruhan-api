@@ -22,7 +22,7 @@ export const getSkills = async (req: Request, res: Response) => {
                 return
             }
         })
-        await redis.setex("skills", 3600, JSON.stringify(result));
+        await redis.set("skills",  JSON.stringify(result));
         sendJson(res, {
             message: "Skills fetched successfully",
             data: result

@@ -22,7 +22,7 @@ export const getProjects = async (req: Request, res: Response) => {
                 return
             }
         })
-        await redis.setex("projects", 3600, JSON.stringify(result));
+        await redis.set("projects", JSON.stringify(result));
         sendJson(res, {
             message: "Projects fetched successfully",
             data: result
