@@ -5,7 +5,7 @@ import app from "./app";
 async function main() {
     try {
         app.listen(config.port, () => {
-            console.log(`love ayaka on http://localhost:${config.port}`);
+            console.log(`on http://localhost:${config.port}`);
         });
     } catch (err) {
         console.log(err);
