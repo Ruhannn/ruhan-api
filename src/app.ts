@@ -19,7 +19,7 @@ app.use(cors());
 app.use(json());
 
 app.get('/', (req, res) => {
-    res.json('😊');
+    res.json('😊hu');
 });
 
 
